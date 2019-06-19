@@ -3,7 +3,7 @@
 How to run Hue in Kubernetes.
 
 
-## Quick Start
+## Services
 
 Assuming you have a Kubernetes cluster configured with Helm installed and images pushed (if not, check the [K8s Cluster](#k8s-cluster) section below).
 
@@ -11,7 +11,7 @@ Assuming you have a Kubernetes cluster configured with Helm installed and images
    * [Hue](helm/hue)
 * [YAML](yaml)
    * [Hue](yaml/hue)
-   * Postgres (TBD)
+   * [Postgres](yaml/postgres)
    * [NGINX](yaml/nginx)
    * [Celery](yaml/celery)
    * Daphne (TBD)
@@ -21,9 +21,17 @@ Assuming you have a Kubernetes cluster configured with Helm installed and images
 
 ## Quick Start
 
+Run:
+
     cd tools/kubernetes/helm
 
     helm install hue -n hue
+
+Upgrade or delete:
+
+    helm upgrade hue hue
+
+    helm delete hue --purge
 
 ## K8s Cluster
 
