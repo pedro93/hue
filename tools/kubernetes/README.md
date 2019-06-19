@@ -29,8 +29,8 @@ Assuming you have a Kubernetes cluster configured with Helm installed and images
 
 ### Ubuntu
 
-* OS: Ubuntu 16.04 or 18.04.
-* Nodes: 1 primary instance of m3.medium (1CPU 3GB).
+* OS: Ubuntu 18.04
+* Nodes: 1 primary instance of m3.medium (1CPU 3GB)
 
 Quick start with https://microk8s.io/#quick-start
 
@@ -39,7 +39,7 @@ sudo snap install microk8s --classic
 
 sudo snap alias microk8s.kubectl kubectl
 
-microk8s.enable metrics-server dns
+microk8s.enable dns ingress storage
 ```
 
 And
@@ -48,6 +48,12 @@ And
 sudo snap install helm --classic
 
 helm init
+```
+
+Optional (for more complete Kubernetes environment):
+
+```
+microk8s.enable metrics-server registry prometheus fluentd dashboard
 ```
 
 ## Images
