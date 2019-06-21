@@ -1585,7 +1585,6 @@ class ClusterConfig():
     self.apps = appmanager.get_apps_dict(self.user) if apps is None else apps
     self.cluster_type = cluster_type
 
-
   def refreshConfig(self):
     # TODO: reload "some ini sections"
     pass
@@ -1612,7 +1611,8 @@ class ClusterConfig():
         ] if app is not None
       ],
       'default_sql_interpreter': default_sql_interpreter,
-      'cluster_type': self.cluster_type
+      'cluster_type': self.cluster_type,
+      'has_computes': self.cluster_type in ['altus', 'snowball'] # or any grouped engine connectors
     }
 
 
