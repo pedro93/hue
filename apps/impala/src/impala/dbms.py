@@ -32,11 +32,11 @@ from impala import conf
 LOG = logging.getLogger(__name__)
 
 
-def get_query_server_config(cluster_config=None):
+def get_query_server_config():
   query_server = {
-      'server_name': _get_server_name(cluster_config),
-      'server_host': conf.SERVER_HOST.get() if not cluster_config else cluster_config.get('server_host'),
-      'server_port': conf.SERVER_PORT.get() if not cluster_config else 21050,
+      'server_name': 'impala',
+      'server_host': conf.SERVER_HOST.get(),
+      'server_port': conf.SERVER_PORT.get(),
       'principal': conf.IMPALA_PRINCIPAL.get(),
       'impersonation_enabled': conf.IMPERSONATION_ENABLED.get(),
       'querycache_rows': conf.QUERYCACHE_ROWS.get(),
