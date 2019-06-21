@@ -587,7 +587,6 @@ class HiveServerClient:
 
 
   def open_session(self, user):
-
     self.user = user
     kwargs = {
         'client_protocol': beeswax_conf.THRIFT_VERSION.get() - 1,
@@ -656,7 +655,7 @@ class HiveServerClient:
     return session
 
 
-  def call(self, fn, req, status=TStatusCode.SUCCESS_STATUS, with_multiple_session=False):
+  def call(self, fn, req, status=TStatusCode.SUCCESS_STATUS, with_multiple_session=False): # Note: with_multiple_session currently ignored
     (res, session) = self.call_return_result_and_session(fn, req, status, with_multiple_session)
     return res
 
