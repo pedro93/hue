@@ -156,18 +156,21 @@ def get_context_computes(request, interface):
     } for cluster in clusters if cluster.get('type') == 'direct'
   ])
 
-  if get_cluster_config(request.user)['has_computes']:
-    if interface == 'impala' or interface == 'report':
-      if IS_K8S_ONLY.get():
-        dw_clusters = DataWarehouse2Api(request.user).list_clusters()['clusters']
-        computes.extend([{
-            'id': cluster.get('crn'),
-            'name': cluster.get('clusterName'),
-            'status': cluster.get('status'),
-            'namespace': cluster.get('namespaceCrn', cluster.get('crn')),
-            'compute_end_point': IS_K8S_ONLY.get() and '%(publicHost)s' % cluster['coordinatorEndpoint'] or '',
-            'type': 'altus-dw'
-          } for cluster in dw_clusters]
+  if get_cluster_config(request.user)['has_computes']: # TODO: only based on interface selected?
+    if 'impala' in interface: # TODO: until dialect
+      # dw_clusters = DataWarehouse2Api(request.user).list_clusters()['clusters']
+      dw_clusters = [
+        {'crn': 'c1', 'clusterName': 'c1', 'status': 'created', 'endpoint': 'c1.gethue.com:10000'},
+        {'crn': 'c2', 'clusterName': 'c2', 'status': 'created', 'endpoint': 'c2.gethue.com:10000'},
+      ]
+      computes.extend([{
+          'id': cluster.get('crn'),
+          'name': cluster.get('clusterName'),
+          'status': cluster.get('status'),
+          'namespace': cluster.get('namespaceCrn', cluster.get('crn')),
+          'compute_end_point': IS_K8S_ONLY.get() and '%(publicHost)s' % cluster['coordinatorEndpoint'] or '',
+          'type': 'altus-dw'
+        } for cluster in dw_clusters]
         )
 
   response[interface] = computes
